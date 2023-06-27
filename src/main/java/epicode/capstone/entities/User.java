@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
@@ -30,6 +31,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
+@JsonIgnoreProperties({ "password", "active", "role", "authorities", "enabled", "credentialsNonExpired",
+		"accountNonExpired", "accountNonLocked" })
 public class User implements UserDetails {
 	@Id
 	@GeneratedValue
