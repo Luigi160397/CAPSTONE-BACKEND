@@ -7,6 +7,7 @@ import java.util.UUID;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -32,6 +33,7 @@ public class Film {
 	private String urlCopertina;
 	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
+	@Column(columnDefinition = "TEXT")
 	private String descrizione;
 	private String voto;
 	@OneToMany(mappedBy = "film")
