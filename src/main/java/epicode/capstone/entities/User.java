@@ -51,6 +51,7 @@ public class User implements UserDetails {
 	@ManyToMany
 	@JoinTable(name = "preferiti", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "film_id"))
 	@JsonManagedReference
+	@JsonIgnoreProperties({ "user", "commenti" })
 	private List<Film> preferiti;
 
 	public User(String username, String email, String password, String nome, String cognome) {

@@ -25,6 +25,7 @@ import epicode.capstone.entities.User;
 import epicode.capstone.entities.payloads.AggiungiPreferitiPayload;
 import epicode.capstone.entities.payloads.ModificaUserPayload;
 import epicode.capstone.entities.payloads.UserRegistrationPayload;
+import epicode.capstone.exceptions.BadRequestException;
 import epicode.capstone.repositories.UsersRepository;
 import epicode.capstone.services.FilmsService;
 import epicode.capstone.services.UsersService;
@@ -97,6 +98,10 @@ public class UsersController {
 		User user = usersService.findByUsername(username);
 
 		Film film = filmsService.findById(payload.getIdFilm());
+
+		if (user.getPreferiti().contains(film)) {
+			throw new BadRequestException("Non puoi aggiungere lo stesso film due volte!");
+		}
 
 		user.addFilm(film);
 		return usersRepo.save(user);

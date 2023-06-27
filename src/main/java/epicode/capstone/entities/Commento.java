@@ -3,7 +3,7 @@ package epicode.capstone.entities;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,6 +19,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "commenti")
+
 public class Commento {
 	@Id
 	@GeneratedValue
@@ -28,7 +29,7 @@ public class Commento {
 	@JsonBackReference
 	private Film film;
 	@ManyToOne
-	@JsonIgnore
+	@JsonIgnoreProperties({ "preferiti" })
 	private User user;
 
 	public Commento(String contenuto, Film film, User user) {
