@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
@@ -28,6 +30,7 @@ public class Film {
 	private UUID id;
 	private String nome;
 	private String urlCopertina;
+	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
 	private String descrizione;
 	private String voto;
