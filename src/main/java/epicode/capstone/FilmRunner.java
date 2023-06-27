@@ -19,8 +19,8 @@ public class FilmRunner implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		List<Film> filmDB = filmRepo.findAll();
 		if (filmDB.size() == 0) {
-			Film film1 = new Film("Aquaman", "https://i.imgur.com/ydO73kB.jpg", Categoria.AZIONE, "\r\n"
-					+ "\"Aquaman\" di James Wan si immerge nell'oceano ma non si distingue dai film supereroistici convenzionali. Una trama prevedibile, personaggi stereotipati e una regia frammentata limitano l'esperienza. Sequenze d'azione spettacolari e buoni effetti visivi non compensano la mancanza di originalità e coinvolgimento.",
+			Film film1 = new Film("Aquaman", "https://i.imgur.com/ydO73kB.jpg", Categoria.AZIONE,
+					"Aquaman di James Wan si immerge nell'oceano ma non si distingue dai film supereroistici convenzionali. Una trama prevedibile, personaggi stereotipati e una regia frammentata limitano l'esperienza. Sequenze d'azione spettacolari e buoni effetti visivi non compensano la mancanza di originalità e coinvolgimento.",
 					"3/5");
 
 			Film film2 = new Film("Super Mario Bros", "https://i.imgur.com/gGmic94.jpg", Categoria.ANIMAZIONE,
@@ -33,7 +33,7 @@ public class FilmRunner implements CommandLineRunner {
 
 			Film film4 = new Film("Star Wars: L'attacco dei cloni", "https://i.imgur.com/karn0mi.jpg",
 					Categoria.FANTASCIENZA,
-					"In \"Star Wars: L'attacco dei cloni\", il secondo capitolo della trilogia prequel, l'Ordine dei Jedi affronta una crescente minaccia separatista. Obi-Wan Kenobi e Anakin Skywalker sono inviati in una missione per proteggere la senatrice Padmé Amidala e scoprire l'origine dell'esercito di cloni. Nel frattempo, Anakin si innamora di Padmé e affronta le tentazioni del lato oscuro della Forza. La trama si sviluppa con intrighi politici, battaglie intergalattiche e il misterioso piano del Signore Oscuro dei Sith, Darth Sidious.",
+					"In Star Wars: L'attacco dei cloni, il secondo capitolo della trilogia prequel, l'Ordine dei Jedi affronta una crescente minaccia separatista. Obi-Wan Kenobi e Anakin Skywalker sono inviati in una missione per proteggere la senatrice Padmé Amidala e scoprire l'origine dell'esercito di cloni. Nel frattempo, Anakin si innamora di Padmé e affronta le tentazioni del lato oscuro della Forza. La trama si sviluppa con intrighi politici, battaglie intergalattiche e il misterioso piano del Signore Oscuro dei Sith, Darth Sidious.",
 					"2.6/5");
 
 			Film film5 = new Film("Lo hobbit: Un viaggio inaspettato", "https://i.imgur.com/FFcoNKl.jpg",
