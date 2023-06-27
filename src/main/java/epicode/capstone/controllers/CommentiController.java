@@ -8,9 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -37,13 +39,30 @@ public class CommentiController {
 	}
 
 	@PostMapping("/{idFilm}")
-	@PreAuthorize("hasAuthority('ADMIN')")
+	@PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Commento createCommento(@PathVariable UUID idFilm, @RequestBody CreaCommentoPayload body) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String username = authentication.getName();
 		User user = usersService.findByUsername(username);
 		return commentiService.create(idFilm, user, body);
+	}
+
+	@PutMapping("/{idFilm}/{idCommento}")
+	@PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
+	public Commento getByIdAndUpdate(@PathVariable UUID idFilm, @PathVariable UUID idCommento,
+			@RequestBody CreaCommentoPayload body) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		User user = usersService.findByUsername(username);
+		return commentiService.findByIdAndUpdate(idFilm, idCommento, user, body);
+	}
+
+	@DeleteMapping("/{idFilm}/{idCommento}")
+	@PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void deleteCommento(@PathVariable UUID idFilm, @PathVariable UUID idCommento) {
+		commentiService.findByIdAndDelete(idFilm, idCommento);
 	}
 
 }

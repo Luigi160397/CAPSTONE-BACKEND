@@ -22,8 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import epicode.capstone.entities.Film;
 import epicode.capstone.entities.User;
+import epicode.capstone.entities.payloads.AggiungiPreferitiPayload;
 import epicode.capstone.entities.payloads.ModificaUserPayload;
 import epicode.capstone.entities.payloads.UserRegistrationPayload;
+import epicode.capstone.repositories.UsersRepository;
+import epicode.capstone.services.FilmsService;
 import epicode.capstone.services.UsersService;
 
 @RestController
@@ -31,6 +34,10 @@ import epicode.capstone.services.UsersService;
 public class UsersController {
 	@Autowired
 	UsersService usersService;
+	@Autowired
+	FilmsService filmsService;
+	@Autowired
+	UsersRepository usersRepo;
 
 	@GetMapping("")
 	@PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
@@ -79,5 +86,33 @@ public class UsersController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String username = authentication.getName();
 		return usersService.findByUsername(username).getPreferiti();
+	}
+
+	@PostMapping("/me/preferiti")
+	@PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
+	@ResponseStatus(HttpStatus.CREATED)
+	public User addFilmToPreferiti(@RequestBody AggiungiPreferitiPayload payload) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		User user = usersService.findByUsername(username);
+
+		Film film = filmsService.findById(payload.getIdFilm());
+
+		user.addFilm(film);
+		return usersRepo.save(user);
+	}
+
+	@DeleteMapping("/me/preferiti/{filmId}")
+	@PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public User removeFilmFromPreferiti(@PathVariable UUID filmId) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		User user = usersService.findByUsername(username);
+
+		Film film = filmsService.findById(filmId);
+
+		user.removeFilm(film);
+		return usersRepo.save(user);
 	}
 }

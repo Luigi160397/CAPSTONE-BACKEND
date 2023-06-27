@@ -20,6 +20,8 @@ import epicode.capstone.repositories.UsersRepository;
 public class UsersService {
 	@Autowired
 	private UsersRepository usersRepo;
+	@Autowired
+	private FilmsService filmsService;
 
 	public Page<User> find(int page, int size, String sortBy) {
 		if (size < 0)
@@ -39,9 +41,9 @@ public class UsersService {
 	public User findByIdAndUpdate(UUID id, ModificaUserPayload u) {
 		User found = this.findById(id);
 		found.setId(id);
-		found.setUsername(u.getUsername());
-		found.setEmail(found.getEmail());
-		found.setPassword(u.getPassword());
+		found.setUsername(found.getUsername());
+		found.setEmail(u.getEmail());
+		found.setPassword(found.getPassword());
 		found.setNome(u.getNome());
 		found.setCognome(u.getCognome());
 		found.setRole(u.getRole());

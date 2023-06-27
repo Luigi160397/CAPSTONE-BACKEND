@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
@@ -34,7 +35,7 @@ public class Film {
 	@JsonManagedReference
 	private List<Commento> commenti;
 	@ManyToMany(mappedBy = "preferiti")
-	@JsonManagedReference
+	@JsonIgnore
 	private List<User> users;
 
 	public Film(String nome, String urlCopertina, Categoria categoria, String descrizione, String voto) {

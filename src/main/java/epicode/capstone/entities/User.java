@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -45,7 +46,7 @@ public class User implements UserDetails {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	@OneToMany(mappedBy = "user")
-	@JsonManagedReference
+	@JsonIgnore
 	private List<Commento> commenti;
 	@ManyToMany
 	@JoinTable(name = "preferiti", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "film_id"))
