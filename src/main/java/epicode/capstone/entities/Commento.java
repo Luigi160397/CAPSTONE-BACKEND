@@ -1,5 +1,6 @@
 package epicode.capstone.entities;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -31,12 +32,14 @@ public class Commento {
 	@ManyToOne
 	@JsonIgnoreProperties({ "preferiti" })
 	private User user;
+	private LocalDateTime dataOra;
 
 	public Commento(String contenuto, Film film, User user) {
 		super();
 		this.contenuto = contenuto;
 		this.film = film;
 		this.user = user;
+		this.dataOra = LocalDateTime.now();
 	}
 
 }
