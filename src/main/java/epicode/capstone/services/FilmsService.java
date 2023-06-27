@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import epicode.capstone.entities.Categoria;
 import epicode.capstone.entities.Film;
 import epicode.capstone.entities.payloads.CreaFilmPayload;
 import epicode.capstone.exceptions.NotFoundException;
@@ -19,14 +20,19 @@ public class FilmsService {
 	@Autowired
 	private FilmsRepository filmsRepo;
 
-	public Page<Film> find(int page, int size, String sortBy) {
+	public Page<Film> find(int page, int size, String sortBy, Categoria categoria, String nome) {
 		if (size < 0)
 			size = 10;
 		if (size > 100)
 			size = 100;
 		Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
-
-		return filmsRepo.findAll(pageable);
+		if (categoria != null) {
+			return filmsRepo.findByCategoria(categoria, pageable);
+		} else if (!nome.equals("")) {
+			return filmsRepo.findByNome(nome, pageable);
+		} else {
+			return filmsRepo.findAll(pageable);
+		}
 	}
 
 	public Film findById(UUID id) throws NotFoundException {

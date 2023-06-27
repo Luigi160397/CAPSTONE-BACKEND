@@ -1,5 +1,6 @@
 package epicode.capstone.controllers;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import epicode.capstone.entities.Categoria;
 import epicode.capstone.entities.Film;
 import epicode.capstone.entities.payloads.CreaFilmPayload;
 import epicode.capstone.services.FilmsService;
@@ -31,8 +33,10 @@ public class FilmsController {
 	@GetMapping("")
 	@PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
 	public Page<Film> getUsers(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
-			@RequestParam(defaultValue = "id") String sortBy) {
-		return filmsService.find(page, size, sortBy);
+			@RequestParam(defaultValue = "id") String sortBy,
+			@RequestParam(required = false) Optional<Categoria> categoria,
+			@RequestParam(defaultValue = "") String nome) {
+		return filmsService.find(page, size, sortBy, categoria.orElse(null), nome);
 	}
 
 	@GetMapping("/{id}")
