@@ -32,7 +32,7 @@ public class CommentiRunner implements CommandLineRunner {
 		List<Commento> commentiDB = commentiRepo.findAll();
 		List<Film> filmsDB = filmsRepo.findAll();
 
-		if (commentiDB.size() == 2) {
+		if (commentiDB.size() == 0) {
 			for (int i = 0; i < 40; i++) {
 				try {
 					int randomIndex = faker.random().nextInt(usersDB.size());

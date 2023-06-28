@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,20 +35,25 @@ public class Film {
 	@Column(columnDefinition = "TEXT")
 	private String descrizione;
 	private String voto;
+	private String durata;
+	private String annoUscita;
 	@OneToMany(mappedBy = "film")
-	@JsonManagedReference
+	@JsonIgnore
 	private List<Commento> commenti;
 	@ManyToMany(mappedBy = "preferiti")
 	@JsonIgnore
 	private List<User> users;
 
-	public Film(String nome, String urlCopertina, Categoria categoria, String descrizione, String voto) {
+	public Film(String nome, String urlCopertina, Categoria categoria, String descrizione, String voto, String durata,
+			String annoUscita) {
 		super();
 		this.nome = nome;
 		this.urlCopertina = urlCopertina;
 		this.categoria = categoria;
 		this.descrizione = descrizione;
 		this.voto = voto;
+		this.durata = durata;
+		this.annoUscita = annoUscita;
 		this.commenti = new ArrayList<>();
 		this.users = new ArrayList<>();
 	}

@@ -19,4 +19,8 @@ public class CreaFilmPayload {
 	String descrizione;
 	@NotNull(message = "Il voto è obbligatorio")
 	String voto;
+	@NotNull(message = "La durata è obbligatoria")
+	String durata;
+	@NotNull(message = "L'anno di uscita è obbligatorio")
+	String annoUscita;
 }
