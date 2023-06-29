@@ -43,7 +43,7 @@ public class FilmsService {
 	public Film create(CreaFilmPayload u) {
 
 		Film newFilm = new Film(u.getNome(), u.getUrlCopertina(), u.getCategoria(), u.getDescrizione(), u.getVoto(),
-				u.getDurata(), u.getAnnoUscita());
+				u.getDurata(), u.getAnnoUscita(), u.getUrlTrailer());
 		return filmsRepo.save(newFilm);
 	}
 
@@ -56,6 +56,7 @@ public class FilmsService {
 		found.setDescrizione(f.getDescrizione());
 		found.setVoto(f.getVoto());
 		found.setDurata(f.getDurata());
+		found.setUrlTrailer(f.getUrlTrailer());
 		found.setAnnoUscita(f.getAnnoUscita());
 		found.setCommenti(found.getCommenti());
 		found.setUsers(found.getUsers());

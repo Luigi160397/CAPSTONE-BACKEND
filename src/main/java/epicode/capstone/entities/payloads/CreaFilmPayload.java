@@ -23,4 +23,6 @@ public class CreaFilmPayload {
 	String durata;
 	@NotNull(message = "L'anno di uscita è obbligatorio")
 	String annoUscita;
+	@NotNull(message = "L'URL del trailer è obbligatorio")
+	String urlTrailer;
 }

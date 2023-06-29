@@ -37,6 +37,7 @@ public class Film {
 	private String voto;
 	private String durata;
 	private String annoUscita;
+	private String urlTrailer;
 	@OneToMany(mappedBy = "film")
 	@JsonIgnore
 	private List<Commento> commenti;
@@ -45,7 +46,7 @@ public class Film {
 	private List<User> users;
 
 	public Film(String nome, String urlCopertina, Categoria categoria, String descrizione, String voto, String durata,
-			String annoUscita) {
+			String annoUscita, String urlTrailer) {
 		super();
 		this.nome = nome;
 		this.urlCopertina = urlCopertina;
@@ -54,6 +55,7 @@ public class Film {
 		this.voto = voto;
 		this.durata = durata;
 		this.annoUscita = annoUscita;
+		this.urlTrailer = urlTrailer;
 		this.commenti = new ArrayList<>();
 		this.users = new ArrayList<>();
 	}
