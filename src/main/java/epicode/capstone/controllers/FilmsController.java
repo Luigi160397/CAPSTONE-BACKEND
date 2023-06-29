@@ -32,7 +32,7 @@ public class FilmsController {
 
 	@GetMapping("")
 	@PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
-	public Page<Film> getUsers(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
+	public Page<Film> getUsers(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "100") int size,
 			@RequestParam(defaultValue = "id") String sortBy,
 			@RequestParam(required = false) Optional<Categoria> categoria,
 			@RequestParam(defaultValue = "") String nome) {
