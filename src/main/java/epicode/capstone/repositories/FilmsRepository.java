@@ -15,6 +15,6 @@ import epicode.capstone.entities.Film;
 public interface FilmsRepository extends JpaRepository<Film, UUID> {
 	Page<Film> findByCategoria(Categoria categoria, Pageable pageable);
 
-	@Query("SELECT f FROM Film f WHERE f.nome LIKE %:nome%")
+	@Query("SELECT f FROM Film f WHERE LOWER(f.nome) LIKE %:nome%")
 	Page<Film> findByNome(String nome, Pageable pageable);
 }
