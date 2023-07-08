@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -38,7 +39,7 @@ public class Film {
 	private String durata;
 	private String annoUscita;
 	private String urlTrailer;
-	@OneToMany(mappedBy = "film")
+	@OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<Commento> commenti;
 	@ManyToMany(mappedBy = "preferiti")
