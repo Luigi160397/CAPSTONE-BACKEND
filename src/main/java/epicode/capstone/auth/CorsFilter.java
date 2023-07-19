@@ -16,17 +16,23 @@ public class CorsFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-		response.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-		response.setHeader("Access-Control-Allow-Methods", "*");
-		response.setHeader("Access-Control-Allow-Headers", "*");
-		response.setHeader("Access-Control-Allow-Max-Age", "600");
+		String allowedOrigins = "http://localhost:3000, https://filmverse.vercel.app";
 
-		if (request.getMethod().equalsIgnoreCase("OPTIONS")) {
-			response.setStatus(HttpServletResponse.SC_OK);
+		String originHeader = request.getHeader("Origin");
+		if (allowedOrigins.contains(originHeader)) {
+			response.setHeader("Access-Control-Allow-Origin", originHeader);
+			response.setHeader("Access-Control-Allow-Methods", "*");
+			response.setHeader("Access-Control-Allow-Headers", "*");
+			response.setHeader("Access-Control-Max-Age", "600");
+
+			if (request.getMethod().equalsIgnoreCase("OPTIONS")) {
+				response.setStatus(HttpServletResponse.SC_OK);
+			} else {
+				filterChain.doFilter(request, response);
+			}
 		} else {
-			filterChain.doFilter(request, response);
+			// Origin not allowed, you can handle it here (e.g., return an error response).
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}
-
 	}
-
 }
