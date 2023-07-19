@@ -30,6 +30,9 @@ public class SecurityConfig {
 
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll());
 
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/swagger-ui/**").permitAll());
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/api-docs/**").permitAll());
+
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/users/**").authenticated());
 
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/films/**").authenticated());
